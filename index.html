@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>우리반</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #f5f6f8;
+    color: #222;
+}
+
+button, input, textarea {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+.app {
+    width: 100%;
+    max-width: 650px;
+    min-height: 100vh;
+    margin: auto;
+}
+
+header {
+    padding: 28px 22px 18px;
+}
+
+.back {
+    border: none;
+    background: none;
+    padding: 0;
+    margin-bottom: 20px;
+    color: #666;
+    font-size: 16px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+.subtitle {
+    margin-top: 8px;
+    color: #888;
+    font-size: 14px;
+}
+
+.menu {
+    padding: 10px 20px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.menu-button {
+    width: 100%;
+    padding: 22px;
+    border: none;
+    border-radius: 18px;
+    background: white;
+    text-align: left;
+    font-size: 17px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+}
+
+.menu-button span {
+    display: block;
+    margin-top: 7px;
+    color: #888;
+    font-size: 13px;
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+.content {
+    padding: 5px 20px 40px;
+}
+
+.card {
+    background: white;
+    border-radius: 16px;
+    padding: 18px;
+    margin-bottom: 13px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+}
+
+.card h3 {
+    margin: 0 0 8px;
+}
+
+.card p {
+    margin: 6px 0;
+    line-height: 1.5;
+    color: #555;
+}
+
+.date {
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 6px;
+}
+
+.add-button,
+.submit {
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    background: #222;
+    color: white;
+    padding: 15px;
+    font-size: 15px;
+}
+
+.form-box {
+    display: none;
+    background: white;
+    padding: 18px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+.form-box.show {
+    display: block;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-bottom: 10px;
+    outline: none;
+}
+
+textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+/* 달력 */
+
+.calendar {
+    background: white;
+    border-radius: 18px;
+    padding: 15px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+}
+
+.calendar-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.calendar-title h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.calendar-title button {
+    border: none;
+    background: #f0f0f0;
+    border-radius: 8px;
+    padding: 8px 13px;
+}
+
+.weekdays,
+.days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+}
+
+.weekdays div {
+    padding: 8px 0;
+    font-size: 12px;
+    color: #888;
+}
+
+.days div {
+    min-height: 65px;
+    padding: 6px 2px;
+    border-radius: 10px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.days div:hover {
+    background: #f1f1f1;
+}
+
+.day-number {
+    margin-bottom: 4px;
+}
+
+.event {
+    background: #eee;
+    border-radius: 5px;
+    padding: 3px;
+    margin-top: 3px;
+    font-size: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.schedule-list {
+    margin-top: 18px;
+}
+
+.schedule-item {
+    background: white;
+    padding: 15px;
+    border-radius: 14px;
+    margin-bottom: 10px;
+}
+
+.schedule-item strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.empty {
+    text-align: center;
+    color: #999;
+    padding: 35px 10px;
+}
+
+.link-card {
+    display: block;
+    text-decoration: none;
+    color: #222;
+    background: white;
+    padding: 18px;
+    border-radius: 15px;
+    margin-bottom: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+}
+
+.link-card small {
+    display: block;
+    color: #888;
+    margin-top: 5px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- ================= 메인 ================= -->
+
+<section id="home" class="page active">
+
+<header>
+    <h1>우리반</h1>
+    <div class="subtitle">1학년 4반 전용 공간</div>
+</header>
+
+<div class="menu">
+
+    <button class="menu-button" onclick="showPage('notice')">
+        📢 공지사항
+        <span>우리반의 중요한 소식을 확인해요</span>
+    </button>
+
+    <button class="menu-button" onclick="showPage('suggestion')">
+        📝 익명 건의함
+        <span>이름 없이 자유롭게 의견을 남겨요</span>
+    </button>
+
+    <button class="menu-button" onclick="showPage('calendar')">
+        📅 우리반 일정
+        <span>시험, 행사, 수행평가 일정을 확인해요</span>
+    </button>
+
+    <button class="menu-button" onclick="showPage('assignment')">
+        🔗 과제 제출 링크
+        <span>과제 제출에 필요한 링크를 한곳에서 확인해요</span>
+    </button>
+
+</div>
+
+</section>
+
+
+<!-- ================= 공지사항 ================= -->
+
+<section id="notice" class="page">
+
+<header>
+    <button class="back" onclick="showPage('home')">← 돌아가기</button>
+    <h1>공지사항</h1>
+    <div class="subtitle">우리반의 중요한 소식</div>
+</header>
+
+<div class="content">
+
+<button class="add-button" onclick="toggleForm('noticeForm')">
+    ＋ 공지 작성
+</button>
+
+<div id="noticeForm" class="form-box">
+
+    <input id="noticeTitle" placeholder="공지 제목">
+
+    <textarea id="noticeText"
+        placeholder="공지 내용을 입력해주세요"></textarea>
+
+    <button class="submit" onclick="addNotice()">
+        공지 올리기
+    </button>
+
+</div>
+
+<div id="noticeList">
+
+    <div class="card">
+        <div class="date">공지</div>
+        <h3>우리반 홈페이지가 만들어졌어요!</h3>
+        <p>공지사항, 건의함, 일정, 과제 링크를 한곳에서 확인할 수 있어요.</p>
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= 익명 건의함 ================= -->
+
+<section id="suggestion" class="page">
+
+<header>
+    <button class="back" onclick="showPage('home')">← 돌아가기</button>
+    <h1>익명 건의함</h1>
+    <div class="subtitle">이름 없이 자유롭게 의견을 남겨주세요</div>
+</header>
+
+<div class="content">
+
+<div class="card">
+
+    <textarea id="suggestionText"
+        placeholder="우리반에 바라는 점이나 건의사항을 적어주세요"></textarea>
+
+    <button class="submit" onclick="addSuggestion()">
+        익명으로 제출하기
+    </button>
+
+</div>
+
+<div id="suggestionList">
+
+    <div class="empty">
+        아직 등록된 건의사항이 없습니다.
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= 일정 ================= -->
+
+<section id="calendar" class="page">
+
+<header>
+    <button class="back" onclick="showPage('home')">← 돌아가기</button>
+    <h1>우리반 일정</h1>
+    <div class="subtitle">날짜를 눌러 일정을 추가하세요</div>
+</header>
+
+<div class="content">
+
+<div class="calendar">
+
+    <div class="calendar-title">
+
+        <button onclick="changeMonth(-1)">‹</button>
+
+        <h2 id="monthTitle"></h2>
+
+        <button onclick="changeMonth(1)">›</button>
+
+    </div>
+
+    <div class="weekdays">
+        <div>일</div>
+        <div>월</div>
+        <div>화</div>
+        <div>수</div>
+        <div>목</div>
+        <div>금</div>
+        <div>토</div>
+    </div>
+
+    <div id="days" class="days"></div>
+
+</div>
+
+
+<!-- 일정 추가 -->
+
+<div id="eventForm" class="form-box">
+
+    <h3 id="selectedDateTitle">일정 추가</h3>
+
+    <input id="eventTitle"
+        placeholder="일정 제목">
+
+    <textarea id="eventText"
+        placeholder="일정 내용을 입력해주세요"></textarea>
+
+    <button class="submit" onclick="addEvent()">
+        일정 등록
+    </button>
+
+</div>
+
+
+<!-- 일정 목록 -->
+
+<div class="schedule-list">
+
+    <h3>📌 등록된 일정</h3>
+
+    <div id="scheduleList">
+
+        <div class="empty">
+            아직 등록된 일정이 없습니다.
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= 과제 ================= -->
+
+<section id="assignment" class="page">
+
+<header>
+    <button class="back" onclick="showPage('home')">← 돌아가기</button>
+    <h1>과제 제출 링크</h1>
+    <div class="subtitle">과제 제출 링크를 한곳에서 확인해요</div>
+</header>
+
+<div class="content">
+
+<button class="add-button"
+    onclick="toggleForm('assignmentForm')">
+    ＋ 과제 링크 추가
+</button>
+
+<div id="assignmentForm" class="form-box">
+
+    <input id="assignmentTitle"
+        placeholder="과제 이름">
+
+    <input id="assignmentUrl"
+        placeholder="제출 링크 (https://...)">
+
+    <button class="submit"
+        onclick="addAssignment()">
+        링크 추가
+    </button>
+
+</div>
+
+<div id="assignmentList">
+
+    <div class="empty">
+        등록된 과제 링크가 없습니다.
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+
+<script>
+
+/* ================= 화면 이동 ================= */
+
+function showPage(pageId) {
+
+    document.querySelectorAll(".page").forEach(page => {
+        page.classList.remove("active");
+    });
+
+    document.getElementById(pageId).classList.add("active");
+
+    window.scrollTo(0, 0);
+
+    if (pageId === "calendar") {
+        renderCalendar();
+        renderScheduleList();
+    }
+}
+
+
+/* ================= 폼 ================= */
+
+function toggleForm(id) {
+
+    document.getElementById(id).classList.toggle("show");
+
+}
+
+
+/* ================= 공지사항 ================= */
+
+function addNotice() {
+
+    const title =
+        document.getElementById("noticeTitle").value.trim();
+
+    const text =
+        document.getElementById("noticeText").value.trim();
+
+    if (!title || !text) {
+        alert("제목과 내용을 모두 입력해주세요.");
+        return;
+    }
+
+    const list =
+        document.getElementById("noticeList");
+
+    const card =
+        document.createElement("div");
+
+    card.className = "card";
+
+    card.innerHTML = `
+        <div class="date">방금 등록</div>
+        <h3>${escapeHtml(title)}</h3>
+        <p>${escapeHtml(text)}</p>
+    `;
+
+    list.prepend(card);
+
+    document.getElementById("noticeTitle").value = "";
+    document.getElementById("noticeText").value = "";
+
+    document.getElementById("noticeForm")
+        .classList.remove("show");
+}
+
+
+/* ================= 익명 건의 ================= */
+
+function addSuggestion() {
+
+    const text =
+        document.getElementById("suggestionText")
+        .value.trim();
+
+    if (!text) {
+        alert("건의 내용을 입력해주세요.");
+        return;
+    }
+
+    const list =
+        document.getElementById("suggestionList");
+
+    const empty =
+        list.querySelector(".empty");
+
+    if (empty) {
+        empty.remove();
+    }
+
+    const card =
+        document.createElement("div");
+
+    card.className = "card";
+
+    card.innerHTML = `
+        <div class="date">익명</div>
+        <p>${escapeHtml(text)}</p>
+    `;
+
+    list.prepend(card);
+
+    document.getElementById("suggestionText").value = "";
+
+    alert("익명으로 제출되었습니다.");
+}
+
+
+/* ================= 일정 ================= */
+
+let currentYear = 2026;
+let currentMonth = 8;
+
+let selectedDate = null;
+
+let events = {};
+
+
+function dateKey(year, month, day) {
+
+    return `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+
+}
+
+
+function renderCalendar() {
+
+    const title =
+        document.getElementById("monthTitle");
+
+    const days =
+        document.getElementById("days");
+
+    title.textContent =
+        `${currentYear}년 ${currentMonth + 1}월`;
+
+    days.innerHTML = "";
+
+    const firstDay =
+        new Date(currentYear, currentMonth, 1).getDay();
+
+    const lastDate =
+        new Date(currentYear, currentMonth + 1, 0).getDate();
+
+
+    // 빈칸
+
+    for (let i = 0; i < firstDay; i++) {
+
+        const blank =
+            document.createElement("div");
+
+        days.appendChild(blank);
+
+    }
+
+
+    // 날짜
+
+    for (let dayNumber = 1;
+         dayNumber <= lastDate;
+         dayNumber++) {
+
+        const cell =
+            document.createElement("div");
+
+        const number =
+            document.createElement("div");
+
+        number.className = "day-number";
+
+        number.textContent = dayNumber;
+
+        cell.appendChild(number);
+
+
+        const key =
+            dateKey(
+                currentYear,
+                currentMonth,
+                dayNumber
+            );
+
+
+        // 해당 날짜의 일정 표시
+
+        if (events[key]) {
+
+            events[key].forEach(event => {
+
+                const eventElement =
+                    document.createElement("div");
+
+                eventElement.className = "event";
+
+                eventElement.textContent =
+                    event.title;
+
+                cell.appendChild(eventElement);
+
+            });
+
+        }
+
+
+        // 날짜 클릭
+
+        cell.onclick = function() {
+
+            selectDate(
+                currentYear,
+                currentMonth,
+                dayNumber
+            );
+
+        };
+
+
+        days.appendChild(cell);
+
+    }
+
+}
+
+
+/* ================= 날짜 선택 ================= */
+
+function selectDate(year, month, day) {
+
+    selectedDate =
+        dateKey(year, month, day);
+
+    document.getElementById("selectedDateTitle")
+        .textContent =
+        `${year}년 ${month + 1}월 ${day}일 일정 추가`;
+
+    document.getElementById("eventForm")
+        .classList.add("show");
+
+    document.getElementById("eventTitle").value = "";
+
+    document.getElementById("eventText").value = "";
+
+    document.getElementById("eventTitle").focus();
+
+}
+
+
+/* ================= 일정 등록 ================= */
+
+function addEvent() {
+
+    if (!selectedDate) {
+
+        alert("날짜를 먼저 선택해주세요.");
+
+        return;
+
+    }
+
+
+    const title =
+        document.getElementById("eventTitle")
+        .value.trim();
+
+    const text =
+        document.getElementById("eventText")
+        .value.trim();
+
+
+    if (!title) {
+
+        alert("일정 제목을 입력해주세요.");
+
+        return;
+
+    }
+
+
+    if (!events[selectedDate]) {
+
+        events[selectedDate] = [];
+
+    }
+
+
+    events[selectedDate].push({
+
+        title: title,
+
+        text: text
+
+    });
+
+
+    document.getElementById("eventForm")
+        .classList.remove("show");
+
+
+    renderCalendar();
+
+    renderScheduleList();
+
+}
+
+
+/* ================= 일정 목록 ================= */
+
+function renderScheduleList() {
+
+    const list =
+        document.getElementById("scheduleList");
+
+    list.innerHTML = "";
+
+    const keys =
+        Object.keys(events).sort();
+
+
+    if (keys.length === 0) {
+
+        list.innerHTML =
+            `<div class="empty">
+                아직 등록된 일정이 없습니다.
+            </div>`;
+
+        return;
+
+    }
+
+
+    keys.forEach(key => {
+
+        events[key].forEach(event => {
+
+            const item =
+                document.createElement("div");
+
+            item.className =
+                "schedule-item";
+
+            item.innerHTML = `
+                <strong>📅 ${key}</strong>
+                <div>${escapeHtml(event.title)}</div>
+                <div style="color:#777;margin-top:5px;">
+                    ${escapeHtml(event.text)}
+                </div>
+            `;
+
+            list.appendChild(item);
+
+        });
+
+    });
+
+}
+
+
+/* ================= 달 이동 ================= */
+
+function changeMonth(direction) {
+
+    currentMonth += direction;
+
+
+    if (currentMonth > 11) {
+
+        currentMonth = 0;
+
+        currentYear++;
+
+    }
+
+
+    if (currentMonth < 0) {
+
+        currentMonth = 11;
+
+        currentYear--;
+
+    }
+
+
+    // 2026년 9월 ~ 2027년 2월만 사용
+
+    const index =
+        currentYear * 12 + currentMonth;
+
+    const min =
+        2026 * 12 + 8;
+
+    const max =
+        2027 * 12 + 1;
+
+
+    if (index < min) {
+
+        currentYear = 2026;
+
+        currentMonth = 8;
+
+    }
+
+
+    if (index > max) {
+
+        currentYear = 2027;
+
+        currentMonth = 1;
+
+    }
+
+
+    renderCalendar();
+
+}
+
+
+/* ================= 과제 링크 ================= */
+
+function addAssignment() {
+
+    const title =
+        document.getElementById("assignmentTitle")
+        .value.trim();
+
+    const url =
+        document.getElementById("assignmentUrl")
+        .value.trim();
+
+
+    if (!title || !url) {
+
+        alert("과제 이름과 링크를 모두 입력해주세요.");
+
+        return;
+
+    }
+
+
+    const list =
+        document.getElementById("assignmentList");
+
+
+    const empty =
+        list.querySelector(".empty");
+
+    if (empty) {
+        empty.remove();
+    }
+
+
+    const card =
+        document.createElement("a");
+
+    card.className = "link-card";
+
+    card.href = url;
+
+    card.target = "_blank";
+
+    card.rel = "noopener noreferrer";
+
+
+    card.innerHTML = `
+        <strong>🔗 ${escapeHtml(title)}</strong>
+        <small>링크를 눌러 과제를 제출하세요</small>
+    `;
+
+
+    list.prepend(card);
+
+
+    document.getElementById("assignmentTitle").value = "";
+
+    document.getElementById("assignmentUrl").value = "";
+
+    document.getElementById("assignmentForm")
+        .classList.remove("show");
+
+}
+
+
+/* ================= HTML 문자 처리 ================= */
+
+function escapeHtml(text) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
+
+}
+
+
+/* ================= 시작 ================= */
+
+renderCalendar();
+
+</script>
+
+</body>
+</html>

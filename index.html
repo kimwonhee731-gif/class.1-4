@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>2026학년도 1-4</title>
 
 <style>
@@ -11,404 +10,174 @@
   box-sizing: border-box;
 }
 
-html {
-  background: #f7f7fb;
-}
-
 body {
   margin: 0;
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Pretendard",
-    "Noto Sans KR",
-    sans-serif;
-  background: #f7f7fb;
+  font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Noto Sans KR", sans-serif;
+  background: #f8f7fb;
   color: #333;
 }
 
-button,
-input,
-textarea {
-  font-family: inherit;
+header {
+  padding: 28px 20px 18px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 27px;
+  font-weight: 800;
+}
+
+header p {
+  margin: 7px 0 0;
+  color: #999;
+  font-size: 13px;
+}
+
+.toolbar {
+  max-width: 1100px;
+  margin: 0 auto 18px;
+  padding: 0 16px;
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toolbar-left,
+.toolbar-right {
+  display: flex;
+  gap: 7px;
+  align-items: center;
 }
 
 button {
-  border: none;
+  border: 0;
   cursor: pointer;
+  font-family: inherit;
 }
 
-/* =========================
-   전체
-========================= */
-
-.container {
-  width: min(1180px, calc(100% - 32px));
-  margin: 0 auto;
-  padding: 34px 0 70px;
-}
-
-/* =========================
-   헤더
-========================= */
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 22px;
-}
-
-.title {
-  font-size: 30px;
-  font-weight: 850;
-  letter-spacing: -1.5px;
-}
-
-.today-btn {
+.month-btn,
+.add-btn {
+  padding: 10px 15px;
+  border-radius: 12px;
   background: white;
-  border: 1px solid #e8e8ef;
-  padding: 10px 16px;
-  border-radius: 13px;
-  font-size: 13px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.05);
+  font-size: 14px;
+}
+
+.add-btn {
+  background: #333;
+  color: white;
   font-weight: 700;
 }
 
-/* =========================
-   검색
-========================= */
-
-.search-area {
-  margin-bottom: 16px;
-}
-
 .search {
-  width: 100%;
-  height: 48px;
-  border: 1px solid #e5e5ec;
-  border-radius: 15px;
-  background: white;
-  padding: 0 17px;
-  font-size: 14px;
+  width: 180px;
+  border: 0;
   outline: none;
-}
-
-.search:focus {
-  border-color: #c9c9d4;
-}
-
-/* =========================
-   달력
-========================= */
-
-.month-header {
+  padding: 11px 14px;
+  border-radius: 12px;
   background: white;
-  border-radius: 22px 22px 0 0;
-  padding: 19px 23px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #eeeeF3;
-}
-
-.month-title {
-  font-size: 23px;
-  font-weight: 850;
-  letter-spacing: -0.8px;
-}
-
-.month-buttons {
-  display: flex;
-  gap: 7px;
-}
-
-.month-buttons button {
-  width: 38px;
-  height: 38px;
-  border-radius: 11px;
-  background: #f5f5f8;
-  font-size: 20px;
-}
-
-.month-buttons button:disabled {
-  opacity: .3;
-  cursor: default;
+  box-shadow: 0 2px 10px rgba(0,0,0,.05);
 }
 
 .calendar {
-  background: white;
-  border-radius: 0 0 22px 22px;
-  overflow: hidden;
-  box-shadow: 0 6px 28px rgba(30, 30, 50, .045);
-}
-
-/* =========================
-   요일
-========================= */
-
-.weekdays,
-.week {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  max-width: 1100px;
+  margin: 0 auto 40px;
+  padding: 0 12px;
 }
 
 .weekdays {
-  background: #fafafd;
-  border-bottom: 1px solid #eeeeF3;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background: white;
+  border-radius: 16px 16px 0 0;
+  overflow: hidden;
 }
 
-.weekday {
+.weekdays div {
+  padding: 12px 4px;
   text-align: center;
-  padding: 12px 0;
   font-size: 12px;
-  font-weight: 750;
-  color: #888;
+  color: #999;
+  font-weight: 700;
 }
 
-.weekday:first-child {
-  color: #e97878;
+.weeks {
+  background: white;
+  border-radius: 0 0 16px 16px;
+  overflow: hidden;
 }
-
-.weekday:last-child {
-  color: #7187d9;
-}
-
-/* =========================
-   한 주
-========================= */
 
 .week {
-  position: relative;
-  min-height: 150px;
-  border-bottom: 1px solid #eeeeF3;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  min-height: 145px;
+  border-top: 1px solid #eee;
 }
-
-.week:last-child {
-  border-bottom: none;
-}
-
-/* =========================
-   날짜 칸
-========================= */
 
 .day {
   position: relative;
   min-width: 0;
-  border-right: 1px solid #eeeeF3;
-  padding: 10px 8px 58px;
-  cursor: pointer;
+  padding: 9px 5px;
+  border-right: 1px solid #eee;
 }
 
 .day:last-child {
-  border-right: none;
+  border-right: 0;
 }
 
-.day.empty {
-  background: #fcfcfd;
-  cursor: default;
-}
-
-.day-number {
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 13px;
-  font-weight: 650;
-  border-radius: 50%;
-  position: relative;
-  z-index: 5;
-}
-
-.day.today .day-number {
-  background: #333;
-  color: white;
-}
-
-.day.sunday .day-number {
-  color: #e97878;
-}
-
-.day.saturday .day-number {
-  color: #7187d9;
-}
-
-.day.today.sunday .day-number,
-.day.today.saturday .day-number {
-  color: white;
-}
-
-/* =========================
-   일정 레이어
-========================= */
-
-.event-layer {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 44px;
-  bottom: 0;
-
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-auto-rows: 30px;
-
-  pointer-events: none;
-}
-
-.event-bar {
-  height: 24px;
-  margin: 2px 4px;
-
-  padding: 4px 8px;
-
-  border-radius: 8px;
-
+.date {
   font-size: 12px;
-  font-weight: 750;
+  color: #777;
+  margin-bottom: 7px;
+  padding-left: 4px;
+}
 
+.other-month .date {
+  color: #ccc;
+}
+
+.event {
+  position: relative;
+  margin: 3px 1px;
+  padding: 6px 8px;
+  border-radius: 7px;
+  font-size: 12px;
+  line-height: 1.3;
+  cursor: pointer;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-
-  cursor: pointer;
-  pointer-events: auto;
-
-  position: relative;
-  z-index: 10;
-
-  transition: transform .15s ease;
 }
 
-.event-bar:hover {
-  transform: translateY(-1px);
+.event.start-event {
+  margin-left: 1px;
 }
 
-.event-pink {
-  background: #ffdce5;
-  color: #a94f69;
+.event.pink { background:#ffdce7; }
+.event.purple { background:#e9ddff; }
+.event.blue { background:#dcecff; }
+.event.green { background:#dcf4e5; }
+.event.yellow { background:#fff0b8; }
+.event.peach { background:#ffe1d1; }
+
+.event-time {
+  font-size: 10px;
+  opacity: .65;
+  margin-right: 4px;
 }
-
-.event-purple {
-  background: #e7ddff;
-  color: #7657ad;
-}
-
-.event-blue {
-  background: #dcecff;
-  color: #5075ad;
-}
-
-.event-green {
-  background: #dff3e5;
-  color: #4e8a60;
-}
-
-.event-yellow {
-  background: #fff0c7;
-  color: #99752d;
-}
-
-.event-peach {
-  background: #ffe3d4;
-  color: #a96346;
-}
-
-.event-bar.start {
-  border-radius: 8px;
-}
-
-.event-bar.middle {
-  border-radius: 5px;
-}
-
-.event-bar.end {
-  border-radius: 8px;
-}
-
-/* =========================
-   상세
-========================= */
-
-.detail-panel {
-  margin-top: 20px;
-  background: white;
-  border-radius: 20px;
-  padding: 24px;
-  display: none;
-  box-shadow: 0 6px 28px rgba(30,30,50,.04);
-}
-
-.detail-panel.show {
-  display: block;
-}
-
-.detail-title {
-  font-size: 21px;
-  font-weight: 850;
-  margin-bottom: 7px;
-}
-
-.detail-date {
-  color: #999;
-  font-size: 13px;
-  margin-bottom: 17px;
-}
-
-.detail-content {
-  white-space: pre-wrap;
-  line-height: 1.7;
-  font-size: 14px;
-}
-
-.detail-image {
-  max-width: 100%;
-  max-height: 450px;
-  margin-top: 18px;
-  border-radius: 14px;
-  display: block;
-}
-
-.detail-actions {
-  display: flex;
-  gap: 8px;
-  margin-top: 20px;
-}
-
-.edit-btn,
-.delete-btn {
-  padding: 10px 15px;
-  border-radius: 10px;
-  font-weight: 750;
-}
-
-.edit-btn {
-  background: #f1f1f6;
-}
-
-.delete-btn {
-  background: #ffe7e7;
-  color: #c45b5b;
-}
-
-/* =========================
-   모달
-========================= */
 
 .modal-bg {
+  display: none;
   position: fixed;
   inset: 0;
-
-  background: rgba(20,20,30,.38);
-
-  display: none;
+  background: rgba(0,0,0,.38);
+  z-index: 100;
   align-items: center;
   justify-content: center;
-
-  padding: 20px;
-
-  z-index: 1000;
+  padding: 18px;
 }
 
 .modal-bg.show {
@@ -416,22 +185,17 @@ button {
 }
 
 .modal {
-  width: 100%;
-  max-width: 480px;
+  width: min(520px, 100%);
   max-height: 90vh;
-
   overflow-y: auto;
-
   background: white;
-  border-radius: 23px;
-
-  padding: 25px;
+  border-radius: 22px;
+  padding: 23px;
 }
 
-.modal-title {
+.modal h2 {
+  margin: 0 0 20px;
   font-size: 21px;
-  font-weight: 850;
-  margin-bottom: 20px;
 }
 
 .field {
@@ -440,28 +204,21 @@ button {
 
 .field label {
   display: block;
-  font-size: 13px;
-  font-weight: 750;
+  font-size: 12px;
+  font-weight: 700;
   margin-bottom: 7px;
+  color: #666;
 }
 
 .field input,
-.field textarea {
+.field textarea,
+.field select {
   width: 100%;
-
-  border: 1px solid #e4e4eb;
+  border: 1px solid #e5e5e5;
   border-radius: 11px;
-
-  padding: 11px 12px;
-
-  font-size: 14px;
-
+  padding: 11px;
+  font-family: inherit;
   outline: none;
-}
-
-.field input:focus,
-.field textarea:focus {
-  border-color: #c5c5d0;
 }
 
 .field textarea {
@@ -469,112 +226,64 @@ button {
   resize: vertical;
 }
 
-.date-row,
+.date-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+}
+
 .time-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 9px;
 }
 
-.all-day-row {
+.check-row {
   display: flex;
   align-items: center;
   gap: 8px;
-
   margin-bottom: 15px;
-
   font-size: 13px;
 }
 
-.all-day-row input {
-  width: 17px;
-  height: 17px;
-}
-
-/* =========================
-   색상
-========================= */
-
 .colors {
   display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+  gap: 9px;
 }
 
-.color-option {
-  width: 34px;
-  height: 34px;
-
+.color-btn {
+  width: 27px;
+  height: 27px;
   border-radius: 50%;
-
-  border: 3px solid transparent;
-
-  cursor: pointer;
+  border: 2px solid transparent;
 }
 
-.color-option.selected {
+.color-btn.selected {
   border-color: #333;
 }
 
-.color-pink {
-  background: #ffdce5;
-}
-
-.color-purple {
-  background: #e7ddff;
-}
-
-.color-blue {
-  background: #dcecff;
-}
-
-.color-green {
-  background: #dff3e5;
-}
-
-.color-yellow {
-  background: #fff0c7;
-}
-
-.color-peach {
-  background: #ffe3d4;
-}
-
-/* =========================
-   사진
-========================= */
-
-.preview {
-  max-width: 100%;
-  max-height: 200px;
-
-  border-radius: 12px;
-
-  margin-top: 10px;
-
-  display: none;
-}
-
-/* =========================
-   버튼
-========================= */
+.color-pink { background:#ffb6cb; }
+.color-purple { background:#c8a8ff; }
+.color-blue { background:#9dc6ff; }
+.color-green { background:#9fddb5; }
+.color-yellow { background:#f6d76c; }
+.color-peach { background:#ffb18c; }
 
 .modal-buttons {
   display: flex;
   gap: 8px;
-  margin-top: 22px;
+  margin-top: 20px;
 }
 
-.cancel-btn,
-.save-btn {
+.modal-buttons button {
   flex: 1;
-  padding: 13px;
+  padding: 12px;
   border-radius: 12px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .cancel-btn {
-  background: #f2f2f5;
+  background: #f1f1f1;
 }
 
 .save-btn {
@@ -582,181 +291,79 @@ button {
   color: white;
 }
 
-.save-btn:disabled {
-  opacity: .55;
-  cursor: wait;
+.delete-btn {
+  background: #ffe5e5;
+  color: #d44;
 }
 
-/* =========================
-   로딩
-========================= */
+.detail-text {
+  white-space: pre-wrap;
+  line-height: 1.6;
+  color: #555;
+}
+
+.detail-image {
+  width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: 12px;
+  margin-top: 15px;
+}
 
 .loading {
-  padding: 50px 20px;
   text-align: center;
+  padding: 60px 20px;
   color: #999;
-  font-size: 13px;
 }
 
-/* =========================
-   모바일
-========================= */
+.error {
+  text-align: center;
+  padding: 50px 20px;
+  color: #d55;
+}
 
 @media (max-width: 700px) {
-
-  .container {
-    width: calc(100% - 20px);
-    padding: 17px 0 45px;
+  header {
+    padding-top: 22px;
   }
 
-  .header {
-    margin-bottom: 14px;
+  header h1 {
+    font-size: 23px;
   }
 
-  .title {
-    font-size: 21px;
-    letter-spacing: -1px;
+  .toolbar {
+    flex-wrap: wrap;
   }
 
-  .today-btn {
-    padding: 8px 12px;
-    font-size: 12px;
-    border-radius: 11px;
+  .toolbar-left,
+  .toolbar-right {
+    width: 100%;
+  }
+
+  .toolbar-right {
+    justify-content: space-between;
   }
 
   .search {
-    height: 45px;
-    font-size: 13px;
+    flex: 1;
+    width: auto;
   }
-
-  .month-header {
-    padding: 15px 13px;
-    border-radius: 18px 18px 0 0;
-  }
-
-  .month-title {
-    font-size: 18px;
-  }
-
-  .month-buttons {
-    gap: 5px;
-  }
-
-  .month-buttons button {
-    width: 34px;
-    height: 34px;
-    font-size: 18px;
-  }
-
-  .calendar {
-    border-radius: 0 0 18px 18px;
-  }
-
-  .weekday {
-    padding: 11px 0;
-    font-size: 10px;
-  }
-
-  /*
-    모바일에서 날짜 칸을 조금 더 높게.
-    일정이 여러 개 있어도 답답하지 않게 함.
-  */
 
   .week {
     min-height: 145px;
   }
 
   .day {
-    padding:
-      9px
-      3px
-      62px;
-
-    min-height: 145px;
+    padding: 8px 3px;
   }
 
-  .day-number {
-    width: 27px;
-    height: 27px;
+  .event {
     font-size: 11px;
+    padding: 6px 5px;
   }
 
-  .event-layer {
-    top: 43px;
-    grid-auto-rows: 28px;
-  }
-
-  .event-bar {
-    height: 23px;
-
-    margin:
-      2px
-      2px;
-
-    padding:
-      4px
-      4px;
-
-    font-size: 8.5px;
-
-    border-radius: 6px;
-  }
-
-  .detail-panel {
-    padding: 18px;
-    border-radius: 17px;
-  }
-
-  .modal-bg {
-    padding: 10px;
-    align-items: flex-end;
-  }
-
-  .modal {
-    max-height: 92vh;
-    padding: 20px;
-    border-radius: 20px 20px 16px 16px;
-  }
-
-  .modal-title {
-    font-size: 19px;
-  }
-
-  .field input,
-  .field textarea {
-    font-size: 14px;
-  }
-
-  .color-option {
-    width: 36px;
-    height: 36px;
-  }
-}
-
-/* 더 작은 휴대폰 */
-
-@media (max-width: 390px) {
-
-  .container {
-    width: calc(100% - 14px);
-  }
-
-  .title {
-    font-size: 19px;
-  }
-
-  .week {
-    min-height: 140px;
-  }
-
-  .day {
-    min-height: 140px;
-  }
-
-  .event-bar {
-    font-size: 8px;
-    padding-left: 3px;
-    padding-right: 3px;
+  .date {
+    font-size: 11px;
   }
 }
 </style>
@@ -764,348 +371,135 @@ button {
 
 <body>
 
-<div class="container">
+<header>
+  <h1>2026학년도 1-4</h1>
+  <p id="monthTitle">2026년 9월</p>
+</header>
 
-  <div class="header">
-
-    <div class="title">
-      2026학년도 1-4
-    </div>
-
-    <button
-      class="today-btn"
-      id="todayBtn"
-    >
-      오늘
-    </button>
-
+<div class="toolbar">
+  <div class="toolbar-left">
+    <button class="month-btn" id="prevBtn">‹</button>
+    <button class="month-btn" id="todayBtn">오늘</button>
+    <button class="month-btn" id="nextBtn">›</button>
   </div>
 
-
-  <div class="search-area">
-
-    <input
-      class="search"
-      id="searchInput"
-      type="text"
-      placeholder="일정 검색하기"
-    >
-
+  <div class="toolbar-right">
+    <input class="search" id="searchInput" placeholder="일정 검색">
+    <button class="add-btn" id="addBtn">+ 일정 추가</button>
   </div>
-
-
-  <div class="month-header">
-
-    <div
-      class="month-title"
-      id="monthTitle"
-    ></div>
-
-    <div class="month-buttons">
-
-      <button id="prevBtn">
-        ‹
-      </button>
-
-      <button id="nextBtn">
-        ›
-      </button>
-
-    </div>
-
-  </div>
-
-
-  <div class="calendar">
-
-    <div class="weekdays">
-
-      <div class="weekday">일</div>
-      <div class="weekday">월</div>
-      <div class="weekday">화</div>
-      <div class="weekday">수</div>
-      <div class="weekday">목</div>
-      <div class="weekday">금</div>
-      <div class="weekday">토</div>
-
-    </div>
-
-    <div id="calendarBody">
-
-      <div class="loading">
-        일정을 불러오는 중...
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <div
-    class="detail-panel"
-    id="detailPanel"
-  >
-
-    <div
-      class="detail-title"
-      id="detailTitle"
-    ></div>
-
-    <div
-      class="detail-date"
-      id="detailDate"
-    ></div>
-
-    <div
-      class="detail-content"
-      id="detailContent"
-    ></div>
-
-    <img
-      class="detail-image"
-      id="detailImage"
-      alt=""
-    >
-
-    <div class="detail-actions">
-
-      <button
-        class="edit-btn"
-        id="editBtn"
-      >
-        수정
-      </button>
-
-      <button
-        class="delete-btn"
-        id="deleteBtn"
-      >
-        삭제
-      </button>
-
-    </div>
-
-  </div>
-
 </div>
 
+<div class="calendar">
+  <div class="weekdays">
+    <div>일</div>
+    <div>월</div>
+    <div>화</div>
+    <div>수</div>
+    <div>목</div>
+    <div>금</div>
+    <div>토</div>
+  </div>
 
-<!-- =========================
-     일정 추가 / 수정
-========================= -->
+  <div class="weeks" id="calendarWeeks">
+    <div class="loading">일정을 불러오는 중...</div>
+  </div>
+</div>
 
-<div
-  class="modal-bg"
-  id="modalBg"
->
-
+<!-- 일정 추가/수정 -->
+<div class="modal-bg" id="formModal">
   <div class="modal">
 
-    <div
-      class="modal-title"
-      id="modalTitle"
-    >
-      일정 추가
-    </div>
-
+    <h2 id="formTitle">일정 추가</h2>
 
     <div class="field">
-
-      <label>
-        일정 이름
-      </label>
-
-      <input
-        id="eventTitle"
-        type="text"
-        placeholder="일정 이름을 입력하세요"
-      >
-
+      <label>일정 제목</label>
+      <input id="eventTitle" placeholder="예: 수학 시험">
     </div>
 
-
     <div class="field">
-
-      <label>
-        기간
-      </label>
-
+      <label>날짜</label>
       <div class="date-row">
-
-        <input
-          id="startDate"
-          type="date"
-        >
-
-        <input
-          id="endDate"
-          type="date"
-        >
-
+        <input type="date" id="startDate">
+        <input type="date" id="endDate">
       </div>
-
     </div>
 
-
-    <div class="all-day-row">
-
-      <input
-        id="allDay"
-        type="checkbox"
-        checked
-      >
-
-      <label for="allDay">
-        종일 일정
-      </label>
-
+    <div class="check-row">
+      <input type="checkbox" id="allDay" checked>
+      <label for="allDay">하루 종일</label>
     </div>
 
-
-    <div
-      class="field"
-      id="timeFields"
-      style="display:none;"
-    >
-
-      <label>
-        시간
-      </label>
-
+    <div id="timeArea">
       <div class="time-row">
-
-        <input
-          id="startTime"
-          type="text"
-          inputmode="numeric"
-          maxlength="5"
-          placeholder="09:00"
-        >
-
-        <input
-          id="endTime"
-          type="text"
-          inputmode="numeric"
-          maxlength="5"
-          placeholder="10:00"
-        >
-
+        <div class="field">
+          <label>시작 시간</label>
+          <input type="time" id="startTime" value="09:00">
+        </div>
+        <div class="field">
+          <label>종료 시간</label>
+          <input type="time" id="endTime" value="10:00">
+        </div>
       </div>
-
     </div>
 
-
     <div class="field">
-
-      <label>
-        색상
-      </label>
-
+      <label>색상</label>
       <div class="colors">
-
-        <div
-          class="color-option color-pink selected"
-          data-color="pink"
-        ></div>
-
-        <div
-          class="color-option color-purple"
-          data-color="purple"
-        ></div>
-
-        <div
-          class="color-option color-blue"
-          data-color="blue"
-        ></div>
-
-        <div
-          class="color-option color-green"
-          data-color="green"
-        ></div>
-
-        <div
-          class="color-option color-yellow"
-          data-color="yellow"
-        ></div>
-
-        <div
-          class="color-option color-peach"
-          data-color="peach"
-        ></div>
-
+        <button class="color-btn color-pink selected" data-color="pink"></button>
+        <button class="color-btn color-purple" data-color="purple"></button>
+        <button class="color-btn color-blue" data-color="blue"></button>
+        <button class="color-btn color-green" data-color="green"></button>
+        <button class="color-btn color-yellow" data-color="yellow"></button>
+        <button class="color-btn color-peach" data-color="peach"></button>
       </div>
-
     </div>
-
 
     <div class="field">
-
-      <label>
-        상세 내용
-      </label>
-
-      <textarea
-        id="eventContent"
-        placeholder="일정에 대한 내용을 입력하세요"
-      ></textarea>
-
+      <label>내용</label>
+      <textarea id="eventContent" placeholder="일정 내용을 입력하세요"></textarea>
     </div>
-
 
     <div class="field">
-
-      <label>
-        사진
-      </label>
-
-      <input
-        id="eventImage"
-        type="file"
-        accept="image/*"
-      >
-
-      <img
-        id="preview"
-        class="preview"
-        alt=""
-      >
-
+      <label>사진</label>
+      <input type="file" id="eventImage" accept="image/*">
     </div>
-
 
     <div class="modal-buttons">
-
-      <button
-        class="cancel-btn"
-        id="cancelBtn"
-      >
-        취소
-      </button>
-
-      <button
-        class="save-btn"
-        id="saveBtn"
-      >
-        저장
-      </button>
-
+      <button class="cancel-btn" id="cancelBtn">취소</button>
+      <button class="save-btn" id="saveBtn">저장</button>
     </div>
 
   </div>
+</div>
 
+<!-- 일정 상세 -->
+<div class="modal-bg" id="detailModal">
+  <div class="modal">
+
+    <h2 id="detailTitle"></h2>
+
+    <div id="detailDate"></div>
+    <div id="detailContent" class="detail-text"></div>
+    <img id="detailImage" class="detail-image" style="display:none;">
+
+    <div class="modal-buttons">
+      <button class="cancel-btn" id="detailCloseBtn">닫기</button>
+      <button class="delete-btn" id="deleteBtn">삭제</button>
+      <button class="save-btn" id="editBtn">수정</button>
+    </div>
+
+  </div>
 </div>
 
 
 <script type="module">
 
-/* =====================================================
-   FIREBASE
-===================================================== */
+/* ================================
+   Firebase
+================================ */
 
-import {
-  initializeApp
-} from
-"https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+import { initializeApp }
+  from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
 import {
   getFirestore,
@@ -1115,1173 +509,513 @@ import {
   updateDoc,
   deleteDoc,
   doc
-} from
-"https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 
 const firebaseConfig = {
-
-  apiKey:
-    "AIzaSyDfTikTJzhyUFxZt68--TKHUG5SDqmyu30",
-
-  authDomain:
-    "calender-5c0e2.firebaseapp.com",
-
-  projectId:
-    "calender-5c0e2",
-
-  storageBucket:
-    "calender-5c0e2.firebasestorage.app",
-
-  messagingSenderId:
-    "375015754915",
-
-  appId:
-    "1:375015754915:web:2299d1c98e3d9c9d17c316",
-
-  measurementId:
-    "G-F43H6H3NLX"
+  apiKey: "AIzaSyDfTikTJzhyUFxZt68--TKHUG5SDqmyu30",
+  authDomain: "calender-5c0e2.firebaseapp.com",
+  projectId: "calender-5c0e2",
+  storageBucket: "calender-5c0e2.firebasestorage.app",
+  messagingSenderId: "375015754915",
+  appId: "1:375015754915:web:2299d1c98e3d9c9d17c316",
+  measurementId: "G-F43H6H3NLX"
 };
 
-
-const app =
-  initializeApp(firebaseConfig);
-
-const db =
-  getFirestore(app);
-
-const eventsCollection =
-  collection(db, "events");
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const eventsRef = collection(db, "events");
 
 
-/* =====================================================
-   기본 설정
-===================================================== */
-
-const MIN_DATE =
-  new Date(2026, 8, 1);
-
-const MAX_DATE =
-  new Date(2027, 1, 28);
-
-let currentMonth =
-  new Date(2026, 8, 1);
+/* ================================
+   변수
+================================ */
 
 let events = [];
+let editingId = null;
+let selectedEventId = null;
 
-let selectedColor =
-  "pink";
-
-let editingId =
-  null;
-
-let selectedEventId =
-  null;
-
-let selectedImageData =
-  "";
+let currentMonth = new Date(2026, 8, 1);
 
 
-/* =====================================================
-   DOM
-===================================================== */
-
-const calendarBody =
-  document.getElementById("calendarBody");
-
-const modalBg =
-  document.getElementById("modalBg");
-
-const modalTitle =
-  document.getElementById("modalTitle");
-
-const eventTitle =
-  document.getElementById("eventTitle");
-
-const startDate =
-  document.getElementById("startDate");
-
-const endDate =
-  document.getElementById("endDate");
-
-const allDay =
-  document.getElementById("allDay");
-
-const startTime =
-  document.getElementById("startTime");
-
-const endTime =
-  document.getElementById("endTime");
-
-const eventContent =
-  document.getElementById("eventContent");
-
-const eventImage =
-  document.getElementById("eventImage");
-
-const preview =
-  document.getElementById("preview");
-
-const timeFields =
-  document.getElementById("timeFields");
-
-const saveBtn =
-  document.getElementById("saveBtn");
-
-
-/* =====================================================
-   날짜
-===================================================== */
-
-function dateKey(date) {
-
-  const y =
-    date.getFullYear();
-
-  const m =
-    String(date.getMonth() + 1)
-      .padStart(2, "0");
-
-  const d =
-    String(date.getDate())
-      .padStart(2, "0");
-
-  return `${y}-${m}-${d}`;
-}
-
-
-function parseDate(str) {
-
-  const [y, m, d] =
-    str.split("-").map(Number);
-
-  return new Date(
-    y,
-    m - 1,
-    d
-  );
-}
-
-
-function formatDate(str) {
-
-  const d =
-    parseDate(str);
-
-  return (
-    `${d.getFullYear()}.` +
-    `${String(d.getMonth() + 1).padStart(2, "0")}.` +
-    `${String(d.getDate()).padStart(2, "0")}`
-  );
-}
-
-
-function isSameDay(a, b) {
-
-  return dateKey(a) === dateKey(b);
-
-}
-
-
-/* =====================================================
-   FIREBASE에서 일정 불러오기
-===================================================== */
+/* ================================
+   Firebase에서 일정 불러오기
+================================ */
 
 async function loadEvents() {
 
   try {
 
-    const snapshot =
-      await getDocs(eventsCollection);
+    const snapshot = await getDocs(eventsRef);
 
-    events =
-      snapshot.docs.map(item => ({
+    events = [];
 
+    snapshot.forEach((item) => {
+
+      events.push({
         id: item.id,
-
         ...item.data()
+      });
 
-      }));
+    });
+
+    console.log("Firebase 일정 불러오기 완료:", events);
 
     renderCalendar();
 
   } catch (error) {
 
-    console.error(error);
+    console.error("Firebase 불러오기 오류:", error);
 
-    calendarBody.innerHTML = `
-      <div class="loading">
-        일정을 불러오지 못했습니다.
-      </div>
-    `;
-
-    alert(
-      "Firebase에서 일정을 불러오지 못했습니다.\n\n" +
-      "Firestore 보안 규칙을 확인해주세요."
-    );
+    document.getElementById("calendarWeeks").innerHTML =
+      `<div class="error">
+        일정을 불러오지 못했습니다.<br>
+        Firestore 보안 규칙을 확인해주세요.
+      </div>`;
 
   }
 
 }
 
 
-/* =====================================================
-   달력 이동
-===================================================== */
+/* ================================
+   Firebase에 새 일정 저장
+================================ */
 
-function changeMonth(amount) {
+async function createEvent(data) {
 
-  currentMonth =
-    new Date(
-      currentMonth.getFullYear(),
-      currentMonth.getMonth() + amount,
-      1
-    );
+  try {
 
+    console.log("Firebase 저장 시작:", data);
 
-  if (currentMonth < MIN_DATE) {
+    const result = await addDoc(eventsRef, data);
 
-    currentMonth =
-      new Date(MIN_DATE);
+    console.log("Firebase 저장 성공! 문서 ID:", result.id);
 
-  }
+    return result.id;
 
+  } catch (error) {
 
-  if (
-    currentMonth.getFullYear() >
-      MAX_DATE.getFullYear() ||
+    console.error("Firebase 저장 실패:", error);
 
-    (
-      currentMonth.getFullYear() ===
-        MAX_DATE.getFullYear() &&
-
-      currentMonth.getMonth() >
-        MAX_DATE.getMonth()
-    )
-  ) {
-
-    currentMonth =
-      new Date(
-        MAX_DATE.getFullYear(),
-        MAX_DATE.getMonth(),
-        1
-      );
+    throw error;
 
   }
-
-
-  renderCalendar();
 
 }
 
 
-/* =====================================================
-   오늘
-===================================================== */
+/* ================================
+   일정 수정
+================================ */
 
-function goToday() {
+async function editEvent(id, data) {
 
-  const today =
-    new Date();
-
-  if (
-    today >= MIN_DATE &&
-    today <= MAX_DATE
-  ) {
-
-    currentMonth =
-      new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        1
-      );
-
-  }
-
-  renderCalendar();
+  await updateDoc(
+    doc(db, "events", id),
+    data
+  );
 
 }
 
 
-/* =====================================================
-   달력
-===================================================== */
+/* ================================
+   일정 삭제
+================================ */
+
+async function removeEvent(id) {
+
+  await deleteDoc(
+    doc(db, "events", id)
+  );
+
+}
+
+
+/* ================================
+   날짜 함수
+================================ */
+
+function dateString(date) {
+
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, "0");
+  const d = String(date.getDate()).padStart(2, "0");
+
+  return `${y}-${m}-${d}`;
+
+}
+
+
+function parseDate(str) {
+
+  const [y, m, d] = str.split("-").map(Number);
+
+  return new Date(y, m - 1, d);
+
+}
+
+
+function dateDiff(a, b) {
+
+  const oneDay = 24 * 60 * 60 * 1000;
+
+  return Math.round(
+    (parseDate(b) - parseDate(a)) / oneDay
+  );
+
+}
+
+
+/* ================================
+   달력 그리기
+================================ */
 
 function renderCalendar() {
 
-  const year =
-    currentMonth.getFullYear();
+  const year = currentMonth.getFullYear();
+  const month = currentMonth.getMonth();
 
-  const month =
-    currentMonth.getMonth();
+  document.getElementById("monthTitle").textContent =
+    `${year}년 ${month + 1}월`;
 
+  const first = new Date(year, month, 1);
 
-  document.getElementById("monthTitle")
-    .textContent =
-      `${year}년 ${month + 1}월`;
+  const firstDay = first.getDay();
 
+  const last = new Date(year, month + 1, 0);
 
-  calendarBody.innerHTML =
-    "";
+  const daysInMonth = last.getDate();
 
+  const previousLast =
+    new Date(year, month, 0).getDate();
 
-  const firstDay =
-    new Date(
-      year,
-      month,
-      1
-    ).getDay();
+  const weeksContainer =
+    document.getElementById("calendarWeeks");
 
+  weeksContainer.innerHTML = "";
 
-  const lastDate =
-    new Date(
-      year,
-      month + 1,
-      0
-    ).getDate();
-
+  let dayNumber = 1;
+  let nextMonthDay = 1;
 
   const totalCells =
-    Math.ceil(
-      (firstDay + lastDate) / 7
-    ) * 7;
+    Math.ceil((firstDay + daysInMonth) / 7) * 7;
 
+  for (let cell = 0; cell < totalCells; cell += 7) {
 
-  const search =
-    document.getElementById("searchInput")
-      .value
-      .trim()
-      .toLowerCase();
+    const week = document.createElement("div");
+    week.className = "week";
 
+    for (let i = 0; i < 7; i++) {
 
-  const today =
-    new Date();
+      const index = cell + i;
 
+      const day = document.createElement("div");
+      day.className = "day";
 
-  for (
-    let weekStart = 0;
-    weekStart < totalCells;
-    weekStart += 7
-  ) {
+      let actualDate;
+      let otherMonth = false;
 
-    const week =
-      document.createElement("div");
+      if (index < firstDay) {
 
-    week.className =
-      "week";
+        const d = previousLast - firstDay + index + 1;
 
+        actualDate =
+          new Date(year, month - 1, d);
 
-    /* 날짜 */
+        otherMonth = true;
 
-    for (
-      let i = 0;
-      i < 7;
-      i++
-    ) {
+      } else if (index >= firstDay + daysInMonth) {
 
-      const cellIndex =
-        weekStart + i;
+        actualDate =
+          new Date(year, month + 1, nextMonthDay++);
 
-      const dayNumber =
-        cellIndex - firstDay + 1;
+        otherMonth = true;
 
+      } else {
 
-      const day =
-        document.createElement("div");
-
-      day.className =
-        "day";
-
-
-      if (
-        dayNumber < 1 ||
-        dayNumber > lastDate
-      ) {
-
-        day.classList.add("empty");
-
-        week.appendChild(day);
-
-        continue;
+        actualDate =
+          new Date(year, month, dayNumber++);
 
       }
 
+      if (otherMonth) {
+        day.classList.add("other-month");
+      }
 
-      const date =
-        new Date(
-          year,
-          month,
-          dayNumber
+      const dateText = document.createElement("div");
+      dateText.className = "date";
+      dateText.textContent = actualDate.getDate();
+
+      day.appendChild(dateText);
+
+      const dateKey = dateString(actualDate);
+
+      const search =
+        document.getElementById("searchInput").value
+        .trim()
+        .toLowerCase();
+
+      const todaysEvents = events.filter(event => {
+
+        if (
+          !event.start ||
+          !event.end
+        ) return false;
+
+        const inside =
+          dateKey >= event.start &&
+          dateKey <= event.end;
+
+        if (!inside) return false;
+
+        if (!search) return true;
+
+        return (
+          String(event.title || "")
+            .toLowerCase()
+            .includes(search) ||
+          String(event.content || "")
+            .toLowerCase()
+            .includes(search)
         );
 
+      });
 
-      const key =
-        dateKey(date);
+      todaysEvents.forEach(event => {
 
+        const eventEl =
+          document.createElement("div");
 
-      if (i === 0) {
-        day.classList.add("sunday");
-      }
+        eventEl.className =
+          `event ${event.color || "pink"}`;
 
-      if (i === 6) {
-        day.classList.add("saturday");
-      }
+        const isStart =
+          dateKey === event.start;
 
-      if (isSameDay(date, today)) {
-        day.classList.add("today");
-      }
+        if (isStart) {
 
+          let text = "";
 
-      const number =
-        document.createElement("div");
+          if (!event.allDay && event.startTime) {
 
-      number.className =
-        "day-number";
+            text +=
+              `<span class="event-time">${event.startTime}</span>`;
 
-      number.textContent =
-        dayNumber;
+          }
 
-      day.appendChild(number);
+          text +=
+            escapeHtml(event.title || "제목 없음");
 
+          eventEl.innerHTML = text;
 
-      day.addEventListener(
-        "click",
-        function(e) {
+        } else {
 
-          if (
-            e.target.closest(".event-bar")
-          ) return;
-
-          openModal(key);
+          /*
+            여러 날 일정은
+            시작 날짜에만 제목 표시
+          */
+          eventEl.innerHTML = "&nbsp;";
 
         }
-      );
 
+        eventEl.addEventListener(
+          "click",
+          () => showDetail(event.id)
+        );
+
+        day.appendChild(eventEl);
+
+      });
 
       week.appendChild(day);
 
     }
 
+    weeksContainer.appendChild(week);
 
-    /* 주의 시작 / 끝 */
+  }
 
-    const weekStartDate =
-      new Date(
-        year,
-        month,
-        1 - firstDay + weekStart
+}
+
+
+/* ================================
+   HTML 문자 안전 처리
+================================ */
+
+function escapeHtml(text) {
+
+  return String(text)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+}
+
+
+/* ================================
+   모달
+================================ */
+
+const formModal =
+  document.getElementById("formModal");
+
+const detailModal =
+  document.getElementById("detailModal");
+
+
+function openForm(event = null) {
+
+  editingId = event ? event.id : null;
+
+  document.getElementById("formTitle").textContent =
+    event ? "일정 수정" : "일정 추가";
+
+  document.getElementById("eventTitle").value =
+    event?.title || "";
+
+  document.getElementById("startDate").value =
+    event?.start || dateString(currentMonth);
+
+  document.getElementById("endDate").value =
+    event?.end || event?.start || dateString(currentMonth);
+
+  document.getElementById("allDay").checked =
+    event?.allDay ?? true;
+
+  document.getElementById("startTime").value =
+    event?.startTime || "09:00";
+
+  document.getElementById("endTime").value =
+    event?.endTime || "10:00";
+
+  document.getElementById("eventContent").value =
+    event?.content || "";
+
+  document.getElementById("eventImage").value = "";
+
+  document.querySelectorAll(".color-btn")
+    .forEach(btn => {
+
+      btn.classList.toggle(
+        "selected",
+        btn.dataset.color === (event?.color || "pink")
       );
-
-
-    const weekEndDate =
-      new Date(
-        weekStartDate.getFullYear(),
-        weekStartDate.getMonth(),
-        weekStartDate.getDate() + 6
-      );
-
-
-    /* 이번 주 일정 */
-
-    const weekEvents =
-      events.filter(event => {
-
-        const start =
-          parseDate(event.start);
-
-        const end =
-          parseDate(event.end);
-
-
-        const matchesSearch =
-          !search ||
-
-          (event.title || "")
-            .toLowerCase()
-            .includes(search) ||
-
-          (event.content || "")
-            .toLowerCase()
-            .includes(search);
-
-
-        return (
-          start <= weekEndDate &&
-          end >= weekStartDate &&
-          matchesSearch
-        );
-
-      });
-
-
-    /* 겹치는 일정 줄 배치 */
-
-    const lanes = [];
-
-
-    weekEvents.sort(
-      (a, b) =>
-        a.start.localeCompare(b.start)
-    );
-
-
-    weekEvents.forEach(event => {
-
-      const eventStart =
-        parseDate(event.start);
-
-      const eventEnd =
-        parseDate(event.end);
-
-
-      const visibleStart =
-        eventStart < weekStartDate
-          ? weekStartDate
-          : eventStart;
-
-
-      const visibleEnd =
-        eventEnd > weekEndDate
-          ? weekEndDate
-          : eventEnd;
-
-
-      let lane = 0;
-
-
-      while (true) {
-
-        if (!lanes[lane]) {
-
-          lanes[lane] = [];
-
-          break;
-
-        }
-
-
-        const conflict =
-          lanes[lane].some(other => {
-
-            return !(
-              visibleEnd < other.start ||
-              visibleStart > other.end
-            );
-
-          });
-
-
-        if (!conflict) break;
-
-        lane++;
-
-      }
-
-
-      lanes[lane].push({
-
-        start: visibleStart,
-
-        end: visibleEnd
-
-      });
-
-
-      let startColumn =
-        visibleStart.getDay() + 1;
-
-      let endColumn =
-        visibleEnd.getDay() + 2;
-
-
-      const bar =
-        document.createElement("div");
-
-
-      bar.className =
-        `event-bar event-${event.color || "pink"}`;
-
-
-      const isRealStart =
-        isSameDay(
-          visibleStart,
-          eventStart
-        );
-
-
-      const isRealEnd =
-        isSameDay(
-          visibleEnd,
-          eventEnd
-        );
-
-
-      /*
-        시작일에만 일정 이름
-      */
-
-      if (isRealStart) {
-
-        bar.textContent =
-          event.title;
-
-      } else {
-
-        bar.textContent =
-          "";
-
-      }
-
-
-      if (isRealStart) {
-        bar.classList.add("start");
-      }
-
-      if (isRealEnd) {
-        bar.classList.add("end");
-      }
-
-      if (
-        !isRealStart &&
-        !isRealEnd
-      ) {
-        bar.classList.add("middle");
-      }
-
-
-      bar.style.gridColumn =
-        `${startColumn} / ${endColumn}`;
-
-      bar.style.gridRow =
-        `${lane + 1}`;
-
-
-      bar.addEventListener(
-        "click",
-        function(e) {
-
-          e.stopPropagation();
-
-          showDetail(event.id);
-
-        }
-      );
-
-
-      let layer =
-        week.querySelector(
-          ".event-layer"
-        );
-
-
-      if (!layer) {
-
-        layer =
-          document.createElement("div");
-
-        layer.className =
-          "event-layer";
-
-        week.appendChild(layer);
-
-      }
-
-
-      layer.appendChild(bar);
 
     });
 
+  updateTimeArea();
 
-    calendarBody.appendChild(week);
-
-  }
-
-
-  updateMonthButtons();
+  formModal.classList.add("show");
 
 }
 
 
-/* =====================================================
-   월 이동 버튼
-===================================================== */
+function closeForm() {
 
-function updateMonthButtons() {
+  formModal.classList.remove("show");
 
-  const prev =
-    document.getElementById("prevBtn");
-
-  const next =
-    document.getElementById("nextBtn");
-
-
-  prev.disabled =
-    currentMonth.getFullYear() ===
-      MIN_DATE.getFullYear() &&
-
-    currentMonth.getMonth() ===
-      MIN_DATE.getMonth();
-
-
-  next.disabled =
-    currentMonth.getFullYear() ===
-      MAX_DATE.getFullYear() &&
-
-    currentMonth.getMonth() ===
-      MAX_DATE.getMonth();
+  editingId = null;
 
 }
 
 
-/* =====================================================
-   모달 열기
-===================================================== */
+function updateTimeArea() {
 
-function openModal(date) {
-
-  editingId =
-    null;
-
-  selectedImageData =
-    "";
-
-
-  modalTitle.textContent =
-    "일정 추가";
-
-
-  eventTitle.value =
-    "";
-
-  startDate.value =
-    date;
-
-  endDate.value =
-    date;
-
-  allDay.checked =
-    true;
-
-  startTime.value =
-    "";
-
-  endTime.value =
-    "";
-
-  eventContent.value =
-    "";
-
-  eventImage.value =
-    "";
-
-  preview.src =
-    "";
-
-  preview.style.display =
-    "none";
-
-
-  selectColor("pink");
-
-
-  toggleTime();
-
-
-  modalBg.classList.add(
-    "show"
-  );
-
-}
-
-
-/* =====================================================
-   수정
-===================================================== */
-
-function editSelected() {
-
-  const event =
-    events.find(
-      item =>
-        item.id ===
-        selectedEventId
-    );
-
-
-  if (!event) return;
-
-
-  editingId =
-    event.id;
-
-
-  modalTitle.textContent =
-    "일정 수정";
-
-
-  eventTitle.value =
-    event.title || "";
-
-
-  startDate.value =
-    event.start || "";
-
-
-  endDate.value =
-    event.end || "";
-
-
-  allDay.checked =
-    event.allDay !== false;
-
-
-  startTime.value =
-    event.startTime || "";
-
-
-  endTime.value =
-    event.endTime || "";
-
-
-  eventContent.value =
-    event.content || "";
-
-
-  selectColor(
-    event.color || "pink"
-  );
-
-
-  selectedImageData =
-    event.image || "";
-
-
-  if (selectedImageData) {
-
-    preview.src =
-      selectedImageData;
-
-    preview.style.display =
-      "block";
-
-  } else {
-
-    preview.src =
-      "";
-
-    preview.style.display =
-      "none";
-
-  }
-
-
-  eventImage.value =
-    "";
-
-
-  toggleTime();
-
-
-  modalBg.classList.add(
-    "show"
-  );
-
-}
-
-
-/* =====================================================
-   시간
-===================================================== */
-
-function toggleTime() {
-
-  timeFields.style.display =
-    allDay.checked
+  document.getElementById("timeArea").style.display =
+    document.getElementById("allDay").checked
       ? "none"
       : "block";
 
 }
 
 
-/* =====================================================
-   색상
-===================================================== */
-
-function selectColor(color) {
-
-  selectedColor =
-    color;
-
-
-  document
-    .querySelectorAll(".color-option")
-    .forEach(option => {
-
-      option.classList.toggle(
-        "selected",
-        option.dataset.color === color
-      );
-
-    });
-
-}
-
-
-/* =====================================================
-   시간 입력
-===================================================== */
-
-function formatTimeInput(input) {
-
-  let value =
-    input.value.replace(
-      /\D/g,
-      ""
-    );
-
-
-  if (value.length > 4) {
-
-    value =
-      value.slice(0, 4);
-
-  }
-
-
-  if (value.length >= 3) {
-
-    value =
-      value.slice(0, 2) +
-      ":" +
-      value.slice(2);
-
-  }
-
-
-  input.value =
-    value;
-
-}
-
-
-startTime.addEventListener(
-  "input",
-  () => formatTimeInput(startTime)
-);
-
-
-endTime.addEventListener(
-  "input",
-  () => formatTimeInput(endTime)
-);
-
-
-/* =====================================================
-   사진
-===================================================== */
-
-eventImage.addEventListener(
-  "change",
-  function() {
-
-    const file =
-      this.files[0];
-
-    if (!file) return;
-
-
-    const reader =
-      new FileReader();
-
-
-    reader.onload =
-      function() {
-
-        selectedImageData =
-          reader.result;
-
-
-        preview.src =
-          selectedImageData;
-
-
-        preview.style.display =
-          "block";
-
-      };
-
-
-    reader.readAsDataURL(file);
-
-  }
-);
-
-
-/* =====================================================
-   이미지 압축
-===================================================== */
-
-function compressImage(dataUrl) {
-
-  return new Promise(resolve => {
-
-    if (!dataUrl) {
-
-      resolve("");
-
-      return;
-
-    }
-
-
-    const img =
-      new Image();
-
-
-    img.onload =
-      function() {
-
-        const maxWidth =
-          900;
-
-
-        let width =
-          img.width;
-
-        let height =
-          img.height;
-
-
-        if (width > maxWidth) {
-
-          height =
-            height *
-            maxWidth /
-            width;
-
-          width =
-            maxWidth;
-
-        }
-
-
-        const canvas =
-          document.createElement(
-            "canvas"
-          );
-
-
-        canvas.width =
-          width;
-
-        canvas.height =
-          height;
-
-
-        const ctx =
-          canvas.getContext(
-            "2d"
-          );
-
-
-        ctx.drawImage(
-          img,
-          0,
-          0,
-          width,
-          height
-        );
-
-
-        resolve(
-          canvas.toDataURL(
-            "image/jpeg",
-            0.72
-          )
-        );
-
-      };
-
-
-    img.src =
-      dataUrl;
-
-  });
-
-}
-
-
-/* =====================================================
+/* ================================
    일정 저장
-===================================================== */
+================================ */
 
 async function saveEvent() {
 
   const title =
-    eventTitle.value.trim();
+    document.getElementById("eventTitle").value.trim();
 
   const start =
-    startDate.value;
+    document.getElementById("startDate").value;
 
   const end =
-    endDate.value;
+    document.getElementById("endDate").value;
 
-  const isAllDay =
-    allDay.checked;
+  const allDay =
+    document.getElementById("allDay").checked;
+
+  const startTime =
+    document.getElementById("startTime").value;
+
+  const endTime =
+    document.getElementById("endTime").value;
 
   const content =
-    eventContent.value;
+    document.getElementById("eventContent").value.trim();
+
+  const imageFile =
+    document.getElementById("eventImage").files[0];
+
+  const selectedColor =
+    document.querySelector(".color-btn.selected")
+      ?.dataset.color || "pink";
 
 
   if (!title) {
 
-    alert(
-      "일정 이름을 입력해주세요."
-    );
+    alert("일정 제목을 입력해주세요.");
 
     return;
 
   }
-
 
   if (!start || !end) {
 
-    alert(
-      "날짜를 선택해주세요."
-    );
+    alert("날짜를 입력해주세요.");
+
+    return;
+
+  }
+
+  if (end < start) {
+
+    alert("종료 날짜가 시작 날짜보다 빠를 수 없습니다.");
 
     return;
 
   }
 
 
-  if (
-    parseDate(start) >
-    parseDate(end)
-  ) {
+  /*
+    기존 사진 유지
+  */
 
-    alert(
-      "종료일은 시작일보다 빠를 수 없습니다."
-    );
+  let image = "";
 
-    return;
+  if (editingId) {
+
+    const oldEvent =
+      events.find(e => e.id === editingId);
+
+    image = oldEvent?.image || "";
 
   }
 
 
-  let image =
-    selectedImageData;
+  /*
+    새 사진이 있으면 base64로 저장
+  */
 
-
-  if (
-    image &&
-    image.startsWith(
-      "data:image"
-    )
-  ) {
+  if (imageFile) {
 
     image =
-      await compressImage(image);
+      await fileToBase64(imageFile);
 
   }
 
@@ -2289,293 +1023,206 @@ async function saveEvent() {
   const data = {
 
     title,
-
     start,
-
     end,
-
-    allDay: isAllDay,
-
-    startTime:
-      isAllDay
-        ? ""
-        : startTime.value,
-
-    endTime:
-      isAllDay
-        ? ""
-        : endTime.value,
-
-    color:
-      selectedColor,
-
+    allDay,
+    startTime: allDay ? "" : startTime,
+    endTime: allDay ? "" : endTime,
+    color: selectedColor,
     content,
-
     image
 
   };
 
 
-  saveBtn.disabled =
-    true;
+  const saveBtn =
+    document.getElementById("saveBtn");
 
-  saveBtn.textContent =
-    "저장 중...";
+  saveBtn.disabled = true;
+  saveBtn.textContent = "저장 중...";
 
 
   try {
 
+    /*
+      ★★★ 핵심 ★★★
+
+      수정이면 updateDoc
+      새 일정이면 addDoc
+    */
+
     if (editingId) {
 
-      await updateDoc(
-        doc(
-          db,
-          "events",
-          editingId
-        ),
+      await editEvent(
+        editingId,
         data
       );
 
-
-      const index =
-        events.findIndex(
-          item =>
-            item.id ===
-            editingId
-        );
-
-
-      if (index !== -1) {
-
-        events[index] = {
-
-          id: editingId,
-
-          ...data
-
-        };
-
-      }
-
-
     } else {
 
-      const created =
-        await addDoc(
-          eventsCollection,
-          data
-        );
+      const newId =
+        await createEvent(data);
 
-
-      events.push({
-
-        id: created.id,
-
-        ...data
-
-      });
-
-    }
-
-
-    closeModal();
-
-    renderCalendar();
-
-
-    if (editingId) {
-
-      showDetail(
-        editingId
+      console.log(
+        "새 일정 생성 완료:",
+        newId
       );
 
     }
 
+
+    /*
+      Firebase에서 다시 전체 일정 불러오기
+    */
+
+    await loadEvents();
+
+    closeForm();
+
+    alert("일정이 저장되었습니다.");
 
   } catch (error) {
 
     console.error(error);
 
     alert(
-      "저장에 실패했습니다.\n\n" +
-      "Firebase Firestore 보안 규칙을 확인해주세요."
+      "일정 저장에 실패했습니다.\n\n" +
+      error.message
     );
 
+  } finally {
+
+    saveBtn.disabled = false;
+    saveBtn.textContent = "저장";
+
   }
-
-
-  saveBtn.disabled =
-    false;
-
-  saveBtn.textContent =
-    "저장";
 
 }
 
 
-/* =====================================================
-   상세 보기
-===================================================== */
+/* ================================
+   파일 → Base64
+================================ */
+
+function fileToBase64(file) {
+
+  return new Promise((resolve, reject) => {
+
+    const reader =
+      new FileReader();
+
+    reader.onload =
+      () => resolve(reader.result);
+
+    reader.onerror =
+      reject;
+
+    reader.readAsDataURL(file);
+
+  });
+
+}
+
+
+/* ================================
+   상세보기
+================================ */
 
 function showDetail(id) {
 
   const event =
-    events.find(
-      item =>
-        item.id === id
-    );
-
+    events.find(e => e.id === id);
 
   if (!event) return;
 
+  selectedEventId = id;
 
-  selectedEventId =
-    id;
-
-
-  document.getElementById(
-    "detailTitle"
-  ).textContent =
-    event.title;
-
+  document.getElementById("detailTitle").textContent =
+    event.title || "제목 없음";
 
   let dateText =
-    `${formatDate(event.start)} ~ ${formatDate(event.end)}`;
+    `${event.start} ~ ${event.end}`;
 
+  if (event.allDay) {
 
-  if (
-    event.allDay === false &&
-    event.startTime
-  ) {
-
-    dateText +=
-      ` · ${event.startTime} ~ ${event.endTime}`;
-
-  }
-
-
-  document.getElementById(
-    "detailDate"
-  ).textContent =
-    dateText;
-
-
-  document.getElementById(
-    "detailContent"
-  ).textContent =
-    event.content ||
-    "등록된 상세 내용이 없습니다.";
-
-
-  const image =
-    document.getElementById(
-      "detailImage"
-    );
-
-
-  if (event.image) {
-
-    image.src =
-      event.image;
-
-    image.style.display =
-      "block";
+    dateText += " · 하루 종일";
 
   } else {
 
-    image.src =
-      "";
-
-    image.style.display =
-      "none";
+    dateText +=
+      ` · ${event.startTime || ""} ~ ${event.endTime || ""}`;
 
   }
 
+  document.getElementById("detailDate").textContent =
+    dateText;
 
-  const panel =
-    document.getElementById(
-      "detailPanel"
-    );
+  document.getElementById("detailContent").textContent =
+    event.content || "";
 
+  const image =
+    document.getElementById("detailImage");
 
-  panel.classList.add(
-    "show"
-  );
+  if (event.image) {
 
+    image.src = event.image;
+    image.style.display = "block";
 
-  panel.scrollIntoView({
-    behavior: "smooth",
-    block: "nearest"
-  });
+  } else {
+
+    image.style.display = "none";
+
+  }
+
+  detailModal.classList.add("show");
 
 }
 
 
-/* =====================================================
-   삭제
-===================================================== */
+function closeDetail() {
 
-async function deleteSelected() {
+  detailModal.classList.remove("show");
+
+  selectedEventId = null;
+
+}
+
+
+/* ================================
+   삭제
+================================ */
+
+async function deleteSelectedEvent() {
+
+  if (!selectedEventId) return;
 
   const event =
-    events.find(
-      item =>
-        item.id ===
-        selectedEventId
-    );
-
+    events.find(e => e.id === selectedEventId);
 
   if (!event) return;
 
-
-  const ok =
-    confirm(
-      `"${event.title}" 일정을 삭제할까요?`
-    );
-
-
-  if (!ok) return;
+  if (!confirm(
+    `"${event.title}" 일정을 삭제할까요?`
+  )) return;
 
 
   try {
 
-    await deleteDoc(
-      doc(
-        db,
-        "events",
-        selectedEventId
-      )
+    await removeEvent(
+      selectedEventId
     );
 
+    await loadEvents();
 
-    events =
-      events.filter(
-        item =>
-          item.id !==
-          selectedEventId
-      );
-
-
-    selectedEventId =
-      null;
-
-
-    document.getElementById(
-      "detailPanel"
-    ).classList.remove(
-      "show"
-    );
-
-
-    renderCalendar();
-
+    closeDetail();
 
   } catch (error) {
 
     console.error(error);
 
     alert(
-      "삭제에 실패했습니다."
+      "삭제에 실패했습니다.\n\n" +
+      error.message
     );
 
   }
@@ -2583,80 +1230,160 @@ async function deleteSelected() {
 }
 
 
-/* =====================================================
-   모달 닫기
-===================================================== */
-
-function closeModal() {
-
-  modalBg.classList.remove(
-    "show"
-  );
-
-  editingId =
-    null;
-
-  selectedImageData =
-    "";
-
-}
-
-
-/* =====================================================
+/* ================================
    버튼 연결
-===================================================== */
+================================ */
 
-document.getElementById(
-  "todayBtn"
-).addEventListener(
-  "click",
-  goToday
-);
-
-
-document.getElementById(
-  "prevBtn"
-).addEventListener(
-  "click",
-  () => changeMonth(-1)
-);
-
-
-document.getElementById(
-  "nextBtn"
-).addEventListener(
-  "click",
-  () => changeMonth(1)
-);
-
-
-document.getElementById(
-  "searchInput"
-).addEventListener(
-  "input",
-  renderCalendar
-);
-
-
-document.getElementById(
-  "allDay"
-).addEventListener(
-  "change",
-  toggleTime
-);
+document
+  .getElementById("addBtn")
+  .addEventListener(
+    "click",
+    () => openForm()
+  );
 
 
 document
-  .querySelectorAll(".color-option")
-  .forEach(option => {
+  .getElementById("cancelBtn")
+  .addEventListener(
+    "click",
+    closeForm
+  );
 
-    option.addEventListener(
+
+document
+  .getElementById("saveBtn")
+  .addEventListener(
+    "click",
+    saveEvent
+  );
+
+
+document
+  .getElementById("allDay")
+  .addEventListener(
+    "change",
+    updateTimeArea
+  );
+
+
+document
+  .getElementById("detailCloseBtn")
+  .addEventListener(
+    "click",
+    closeDetail
+  );
+
+
+document
+  .getElementById("deleteBtn")
+  .addEventListener(
+    "click",
+    deleteSelectedEvent
+  );
+
+
+document
+  .getElementById("editBtn")
+  .addEventListener(
+    "click",
+    () => {
+
+      const event =
+        events.find(e => e.id === selectedEventId);
+
+      if (!event) return;
+
+      closeDetail();
+      openForm(event);
+
+    }
+  );
+
+
+document
+  .getElementById("prevBtn")
+  .addEventListener(
+    "click",
+    () => {
+
+      currentMonth =
+        new Date(
+          currentMonth.getFullYear(),
+          currentMonth.getMonth() - 1,
+          1
+        );
+
+      renderCalendar();
+
+    }
+  );
+
+
+document
+  .getElementById("nextBtn")
+  .addEventListener(
+    "click",
+    () => {
+
+      currentMonth =
+        new Date(
+          currentMonth.getFullYear(),
+          currentMonth.getMonth() + 1,
+          1
+        );
+
+      renderCalendar();
+
+    }
+  );
+
+
+document
+  .getElementById("todayBtn")
+  .addEventListener(
+    "click",
+    () => {
+
+      const today = new Date();
+
+      currentMonth =
+        new Date(
+          today.getFullYear(),
+          today.getMonth(),
+          1
+        );
+
+      renderCalendar();
+
+    }
+  );
+
+
+document
+  .getElementById("searchInput")
+  .addEventListener(
+    "input",
+    renderCalendar
+  );
+
+
+/* 색상 선택 */
+
+document
+  .querySelectorAll(".color-btn")
+  .forEach(btn => {
+
+    btn.addEventListener(
       "click",
       () => {
 
-        selectColor(
-          option.dataset.color
-        );
+        document
+          .querySelectorAll(".color-btn")
+          .forEach(b =>
+            b.classList.remove("selected")
+          );
+
+        btn.classList.add("selected");
 
       }
     );
@@ -2664,73 +1391,37 @@ document
   });
 
 
-document.getElementById(
-  "cancelBtn"
-).addEventListener(
+/* ================================
+   모달 바깥 클릭
+================================ */
+
+formModal.addEventListener(
   "click",
-  closeModal
-);
+  (e) => {
 
-
-saveBtn.addEventListener(
-  "click",
-  saveEvent
-);
-
-
-document.getElementById(
-  "editBtn"
-).addEventListener(
-  "click",
-  editSelected
-);
-
-
-document.getElementById(
-  "deleteBtn"
-).addEventListener(
-  "click",
-  deleteSelected
-);
-
-
-/* 모달 바깥 클릭 */
-
-modalBg.addEventListener(
-  "click",
-  function(e) {
-
-    if (e.target === modalBg) {
-
-      closeModal();
-
+    if (e.target === formModal) {
+      closeForm();
     }
 
   }
 );
 
 
-/* ESC */
+detailModal.addEventListener(
+  "click",
+  (e) => {
 
-document.addEventListener(
-  "keydown",
-  function(e) {
-
-    if (e.key === "Escape") {
-
-      closeModal();
-
+    if (e.target === detailModal) {
+      closeDetail();
     }
 
   }
 );
 
 
-/* =====================================================
+/* ================================
    시작
-===================================================== */
-
-renderCalendar();
+================================ */
 
 loadEvents();
 
